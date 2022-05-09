@@ -17,75 +17,69 @@
 <section class="h-100 h-custom" style="background-color: #8fc4b7;">
     <div class="container py-5 h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
-            <div class="col-lg-8 col-xl-6">
+            <div class="col-lg-7 col-xl-4">
                 <div class="card rounded-3">
                     <div class="card-body p-4 p-md-5">
-                        <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2">Ak-Talaa Taxi</h3>
                         <div th:if="${session.message}" th:classappend="${session.message.type}" class="alert" role="alert">
                             <p class="text-center" th:text="${session.message.content}"></p>
                             <th:block th:text="${#session.removeAttribute('message')}"></th:block>
                         </div>
+                        <h1 class="text-center">Register Here !!</h1>
                         <form class="px-md-2" method="post"action="" th:object="${user}" th:action="@{/do_register}">
                             <div class="form-outline ">
-                                <label class="form-label"  for="firstName" >First Name</label>
+                                <label class="form-label"  for="firstName" > </label>
                                 <input type="text" id="firstName" name="firstName"
                                        th:classappend="${#fields.hasErrors('firstName') ? 'is-invalid':''}"
-                                       class="form-control" placeholder="Enter here"
+                                       class="form-control" placeholder="Name"
                                        th:value="${user.firstName}"/>
                                 <div class="invalid-feedback" th:each="e : ${#fields.errors('firstName')}" th:text="${e}">
                                 </div>
                             </div>
+
                             <div class="form-outline ">
-                                <label class="form-label"  for="lastName">last Name</label>
-                                <input type="text" id="lastName" name="lastName"
-                                       class="form-control" placeholder="Enter here"
-                                       th:value="${user.lastName}"
-                                />
-                            </div>
-                            <div class="form-outline ">
-                                <label class="form-label"  for="email">Email</label>
+                                <label class="form-label"  for="email"></label>
                                 <input type="email" id="email" name="email"
                                        th:classappend="${#fields.hasErrors('email') ? 'is-invalid':''}"
-                                       class="form-control" placeholder="Enter here"
+                                       class="form-control" placeholder="Email"
                                        th:value="${user.email}"
                                 />
                                 <div class="invalid-feedback" th:each="e : ${#fields.errors('email')}" th:text="${e}">
                                 </div></div>
                             <div class="form-outline ">
-                                <label class="form-label"  for="email">Car Information </label>
+                                <label class="form-label"  for="email"></label>
                                 <input type="text" id="carInfo" name="carInfo" class="form-control"
                                        required
                                        th:classappend="${#fields.hasErrors('carInfo') ? 'is-invalid':''}"
-                                       placeholder="Enter here"
+                                       placeholder="Car Information"
                                        th:value="${user.carInfo}"/>
                                 <div class="invalid-feedback" th:each="e : ${#fields.errors('carInfo')}" th:text="${e}">
-                                </div></div>
-
-                            <div  style="margin-top: 20px">
-                                <div class="row">
-                                    <div class="form-outline col-md-6" style="width: 100%">
-                                        <label for="password">Password:</label>
-                                        <input type="password" name="password" id="password"
-                                               required
-                                               th:classappend="${#fields.hasErrors('password') ? 'is-invalid':''}"
-                                               th:value="${user.password}"/>
-
-                                        <i class="far fa-eye" id="togglePassword" style="margin-left: -30px; cursor: pointer;"></i>
-                                        <div class="invalid-feedback" th:each="e : ${#fields.errors('password')}" th:text="${e}">
-
-                                        </div></div>
-                                    <div class="form-outline col-md-6"style="width: 100%">
-                                        <label for="phone">Phone Number :</label>
-                                        <input type="text" name="phone" id="phone"
-                                               required
-                                               th:classappend="${#fields.hasErrors('phone') ? 'is-invalid':''}"
-                                               th:value="${user.phone}"/>
-                                        <div class="invalid-feedback" th:each="e : ${#fields.errors('phone')}" th:text="${e}">
-                                        </div></div>
                                 </div>
                             </div>
+                            <div class="form-outline ">
+                                <label class="form-label"  for="password"> </label>
+                                <input type="password" id="password" name="password" class="form-control"
+                                       required
+
+                                       th:classappend="${#fields.hasErrors('password') ? 'is-invalid':''}"
+                                       placeholder="Password"
+                                       th:value="${user.password}"/>
+                                <div class="invalid-feedback" th:each="e : ${#fields.errors('password')}" th:text="${e}">
+                                </div>
+                            </div>
+                            <div class="form-outline ">
+                                <label class="form-label"  for="phone"> </label>
+                                <input type="text" id="phone" name="phone" class="form-control"
+                                       required
+                                       th:classappend="${#fields.hasErrors('phone') ? 'is-invalid':''}"
+                                       placeholder="Phone Number "
+                                       th:value="${user.phone}"/>
+                                <div class="invalid-feedback" th:each="e : ${#fields.errors('phone')}" th:text="${e}">
+                                </div>
+                            </div>
+
                             <div class="text-center " style="margin-top: 30px">
-                                <button type="submit" class="btn btn-success btn-lg mb-1">Submit</button>
+                                <button type="submit" class="btn btn-success ">Submit</button>
+                                <button type="reset" class="btn btn-warning ">Reset</button>
                             </div>
 
                         </form>

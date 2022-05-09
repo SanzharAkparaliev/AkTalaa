@@ -24,7 +24,6 @@ public class User {
     @NotBlank(message = "Name field is required !!")
     @Size(min = 2,max = 20,message = "min 2 and max 20 characters are allowed")
     private String firstName;
-    private String lastName;
 
     @Column(nullable = false)
     private String password;
