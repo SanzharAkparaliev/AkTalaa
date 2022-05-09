@@ -362,3 +362,13 @@ ol li {
     margin-bottom: 0px;
     position: relative;
 }
+@media (min-width: 1025px) {
+    .h-custom {
+        height: 100vh !important;
+    }
+}
+
+form i {
+    margin-left: -30px;
+    cursor: pointer;
+}
