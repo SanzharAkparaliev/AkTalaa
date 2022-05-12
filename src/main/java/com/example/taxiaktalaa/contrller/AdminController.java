@@ -34,6 +34,13 @@ public class AdminController {
         categoryReposirory.save(category);
         return "redirect:/admin/categories";
     }
+    @PostMapping("/update-category")
+    public String updateCategoru(@ModelAttribute("category")Category category){
+        Category category1 = categoryReposirory.findById(category.getCId()).get();
+        category1.setCatName(category.getCatName());
+        categoryReposirory.save(category1);
+        return "redirect:/admin/categories";
+    }
 
     @GetMapping("/categories")
     public String allCategory(Model model){
@@ -53,7 +60,7 @@ public class AdminController {
         Optional<Category> category = categoryReposirory.findById(id);
         if(category.isPresent()){
             model.addAttribute("category",category.get());
-            return "admin/add-category";
+            return "admin/update-category";
         }else
             return  "404";
     }

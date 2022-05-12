@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:insert="admin/fragmants.html :: head">
+</head>
+<body>
+
+<div th:insert="admin/fragmants.html :: nav"></div>
+<div class="wrapper d-flex" >
+    <div th:insert="admin/fragmants.html :: sideMune"></div>
+    <div class="content" style="color: white;" >
+        <main>
+            <div class="container-fluid">
+                <div class="row ml-3">
+                    <div class="col-md-12 my-3">
+                        <div class="bg-mattBlackLight px-3 py-3 text-center" >
+                            <h4 class="mb-2">Update Category</h4>
+                            <p>Example: <b>Бишкек-Ош</b></p>
+                            <form action="" th:object="${category}"
+                                  method="post"
+                                  th:action="@{/admin/update-category}" >
+                                <div class="input-group">
+                                    <input type="hidden" th:value="${category.getCId()}" name="cId">
+                                    <input required type="text" th:value="${category.catName}" id="catName" name="catName" placeholder="Enter Category here" class="form-control">
+                                </div>
+                                <div class="container mt-3">
+                                    <button class="btn btn-primary">Submit</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+<script
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous"
+></script>
+<script
+        src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.bundle.min.js"
+        integrity="sha256-OUFW7hFO0/r5aEGTQOz9F/aXQOt+TwqI1Z4fbVvww04="
+        crossorigin="anonymous"
+></script>
+<script
+        src="https://cdnjs.cloudflare.com/ajax/libs/jQuery-slimScroll/1.3.8/jquery.slimscroll.min.js"
+        integrity="sha256-qE/6vdSYzQu9lgosKxhFplETvWvqAAlmAuR+yPh/0SI="
+        crossorigin="anonymous"
+></script>
+<script src="./js/script.js"></script>
+</body>
+</html>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+
+</body>
+</html>
