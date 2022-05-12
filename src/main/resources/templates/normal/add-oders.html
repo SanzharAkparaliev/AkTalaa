@@ -1,11 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head th:insert="normal/fragmants.html :: head">
-
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Add Oders</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+    <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
 
 <div th:insert="normal/fragmants.html :: nav"></div>
+<div th:fragment="sideMune"></div>
 <div class="wrapper d-flex" >
     <div th:insert="normal/fragmants.html :: sideMune"></div>
     <div class="content" style="color: white;" >
@@ -28,8 +36,12 @@
                                         </div>
                                         <input required type="number"  id="catName" name="price" placeholder="Enter price here" class="form-control">
                                     </div>
-                                    <div>Date : </div>
-                                    <input type="text" style="width: 213px;" class="datepicker" >
+                                    <div class="input-group row pt-4">
+                                        <div class="col-md-4 ">
+                                            <input id="startDate"  placeholder="Date select"/>
+                                        </div>
+                                            <input required type="number"  id="place" name="place" placeholder="Enter place here" class="form-control">
+                                    </div>
 
                                     <div class="container mt-3">
                                         <button class="btn btn-primary">Submit</button>
@@ -43,30 +55,24 @@
         </main>
     </div>
 </div>
-<script>$.fn.datepicker.defaults.format = "mm/dd/yyyy";
-$('.datepicker').datepicker({
-    startDate: '-3d'
-})</script>
-<script
-        src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"
-        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-        crossorigin="anonymous"
-></script>
-<script
-        src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.bundle.min.js"
-        integrity="sha256-OUFW7hFO0/r5aEGTQOz9F/aXQOt+TwqI1Z4fbVvww04="
-        crossorigin="anonymous"
-></script>
-<script
-        src="https://cdnjs.cloudflare.com/ajax/libs/jQuery-slimScroll/1.3.8/jquery.slimscroll.min.js"
-        integrity="sha256-qE/6vdSYzQu9lgosKxhFplETvWvqAAlmAuR+yPh/0SI="
-        crossorigin="anonymous"
-></script>
-<script src="./js/script.js"></script>
-</body>
-</html>
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+<script>
+    var today = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
+    $('#startDate').datepicker({
+        uiLibrary: 'bootstrap4',
+        iconsLibrary: 'fontawesome',
+        minDate: today,
+        maxDate: function () {
+            return $('#endDate').val();
+        }
+    });
+    $('#endDate').datepicker({
+        uiLibrary: 'bootstrap4',
+        iconsLibrary: 'fontawesome',
+        minDate: function () {
+            return $('#startDate').val();
+        }
+    });
+</script>
 
 </body>
 </html>
