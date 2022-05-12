@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:insert="normal/fragmants.html :: head">
+</head>
+<body>
+
+<div th:insert="normal/fragmants.html :: nav"></div>
+<div class="wrapper d-flex" >
+    <div th:insert="normal/fragmants.html :: sideMune"></div>
+    <div class="content" style="color: white;" >
+        <main>
+            <div class="container-fluid">
+                <div class="row ml-3">
+                    <div class="col-md-12 my-3">
+                        <div class="bg-mattBlackLight px-3 py-3 text-center" >
+                            <h4 class="mb-2">All Orders</h4>
+                            <a th:href="@{/user/add-orders}" style="margin: 20px 0" class="btn btn-primary">Add New Orders</a>
+                            <table class="table" style="color: white">
+                                <thead class="thead-light">
+                                <tr>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Price</th>
+                                    <th scope="col">Place</th>
+                                    <th scope="col">Date</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                <tr th:each="order, iStat : ${orders}">
+                                    <th scope="row" th:text="${iStat.index + 1}">1</th>
+                                    <td th:text="${order.price}">Larry</td>
+                                    <td th:text="${order.place}">Larry</td>
+                                    <td th:text="${order.date}">Larry</td>
+
+                                    <td>
+                                        <a href="" class="btn btn-danger">Delete</a>
+                                        <a href=""  class="btn btn-primary">Update</a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+<script
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous"
+></script>
+<script
+        src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.bundle.min.js"
+        integrity="sha256-OUFW7hFO0/r5aEGTQOz9F/aXQOt+TwqI1Z4fbVvww04="
+        crossorigin="anonymous"
+></script>
+<script
+        src="https://cdnjs.cloudflare.com/ajax/libs/jQuery-slimScroll/1.3.8/jquery.slimscroll.min.js"
+        integrity="sha256-qE/6vdSYzQu9lgosKxhFplETvWvqAAlmAuR+yPh/0SI="
+        crossorigin="anonymous"
+></script>
+<script src="./js/script.js"></script>
+</body>
+</html>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+
+</body>
+</html>

@@ -30,15 +30,15 @@
 
                                     <div class="input-group row">
                                         <div class="col-md-4">
-                                            <select class="form-control form-select form-select-sm" id="dropDownList">
-                                                <option th:each="category:${categories}" th:value="${category}" th:text="${category.catName}"></option>
+                                            <select class="form-control form-select form-select-sm" id="dropDownList" name="category">
+                                                <option  th:each="category:${categories}" th:value="${category.cId}" th:text="${category.catName}"></option>
                                             </select>
                                         </div>
                                         <input required type="number"  id="catName" name="price" placeholder="Enter price here" class="form-control">
                                     </div>
                                     <div class="input-group row pt-4">
                                         <div class="col-md-4 ">
-                                            <input id="startDate"  placeholder="Date select"/>
+                                            <input id="startDate" name="date" placeholder="Date select"/>
                                         </div>
                                             <input required type="number"  id="place" name="place" placeholder="Enter place here" class="form-control">
                                     </div>

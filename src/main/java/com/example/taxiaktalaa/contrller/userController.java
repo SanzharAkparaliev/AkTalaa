@@ -7,6 +7,7 @@ import com.example.taxiaktalaa.entity.User;
 import com.example.taxiaktalaa.helper.Message;
 import com.example.taxiaktalaa.repository.CategoryReposirory;
 import com.example.taxiaktalaa.repository.ContactRepository;
+import com.example.taxiaktalaa.repository.OrdersRepository;
 import com.example.taxiaktalaa.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
@@ -27,6 +28,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.security.Principal;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,6 +43,8 @@ public class userController {
     private CategoryReposirory categoryReposirory;
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
+    @Autowired
+    private OrdersRepository ordersRepository;
     @ModelAttribute
     public void addCommonData(Model model,Principal principal){
         String userName = principal.getName();
@@ -209,12 +213,33 @@ public class userController {
         return "redirect:/user/index";
     }
 
-    @GetMapping("/add-oders")
+    @GetMapping("/add-orders")
     public String addOders(Model model){
         List<Category> category = categoryReposirory.findAll();
         model.addAttribute("title","Add Oders");
         model.addAttribute("orders",new Orders());
         model.addAttribute("categories",category);
         return "/normal/add-oders";
+    }
+    @PostMapping("/add-orders")
+    public String saveOders(@ModelAttribute("oders")Orders orders,Model model,Principal principal){
+        List<Category> category = categoryReposirory.findAll();
+
+        Orders newOrders = new Orders();
+        newOrders.setUser(userRepository.getUserByUserName(principal.getName()));
+        newOrders.setCategory(orders.getCategory());
+        newOrders.setDate(orders.getDate());
+        newOrders.setPlace(orders.getPlace());
+        newOrders.setPrice(orders.getPrice());
+        ordersRepository.save(newOrders);
+        return "redirect:/user/orders";
+    }
+
+    @GetMapping("/orders")
+    public String getOrders(Model model){
+        List<Orders> orders = ordersRepository.findAll();
+        model.addAttribute("title","All Orders");
+        model.addAttribute("orders",orders);
+        return "normal/orders";
     }
 }

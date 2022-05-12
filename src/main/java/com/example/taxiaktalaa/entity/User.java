@@ -1,7 +1,9 @@
 package com.example.taxiaktalaa.entity;
 
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -11,7 +13,8 @@ import java.util.List;
 
 @Entity
 @Table(name = "USER")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 public class User {
     @Id
