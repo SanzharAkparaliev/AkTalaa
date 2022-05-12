@@ -1,6 +1,8 @@
 package com.example.taxiaktalaa.helper;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor

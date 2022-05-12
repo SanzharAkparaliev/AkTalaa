@@ -1,45 +1,38 @@
 package com.example.taxiaktalaa.entity;
 
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
-import java.util.HashSet;
-import java.util.Set;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-@Getter
-@Setter
+@Table(name = "USER")
+@Data
 @NoArgsConstructor
-@AllArgsConstructor
 public class User {
     @Id
-    @GeneratedValue
-    private Long userId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer userId;
+
     @NotBlank(message = "Name field is required !!")
     @Size(min = 2,max = 20,message = "min 2 and max 20 characters are allowed")
-    private String firstName;
-
-    @Column(nullable = false)
-    private String password;
-
-    @NotNull
-    @NotEmpty
-    @Pattern(regexp="[A-Za-z0-9._%-+]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}")
+    private String name;
+    @Column(unique = true)
     private String email;
+    private String password;
+    private String role;
+    private boolean enabled;
+    private String imageUrl;
+    @Column(length = 500)
+    private String about;
 
-    @NotNull
-    private String phone;
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL,orphanRemoval = true)
+    private List<Contact> contactList = new ArrayList<>();
 
-    @NotNull
-    private String carInfo;
-
-    @OneToMany(mappedBy = "user",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-    @JsonIgnore
-    private Set<UserRole> userRoles = new HashSet<>();
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL,orphanRemoval = true)
+    private List<Orders> orders = new ArrayList<>();
 }
