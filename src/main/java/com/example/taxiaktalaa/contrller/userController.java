@@ -242,4 +242,10 @@ public class userController {
         model.addAttribute("orders",orders);
         return "normal/orders";
     }
+
+    @GetMapping("/orders/delete/{ordersId}")
+    public String deleteOrders(@PathVariable("ordersId")Long id){
+        ordersRepository.deleteById(id);
+        return "redirect:/user/orders";
+    }
 }
