@@ -10,7 +10,6 @@
     <link th:href="@{css/style.css}"  rel="stylesheet">
 
     <title th:text="${title}"></title>
-<!--    <style>body{ background-color: #e2e2e2!important;}</style>-->
 </head>
 <body>
 <!--<nav class="navbar navbar-expand-lg navbar-dark  bg-primary">-->
@@ -56,7 +55,7 @@
                         </a>
                         <ul class="dropdown-menu">
                                 <li th:each="contact:${categories}" >
-                                    <a style="text-decoration: none" th:href="@{/shop/category/{id}(id=${contact.cId})}" th:text="${contact.catName}"></a>
+                                    <a style="text-decoration: none" th:href="@{/category/{id}(id=${contact.cId})}" th:text="${contact.catName}"></a>
                                 </li>
                         </ul>
                     </li>

@@ -1,9 +1,11 @@
 package com.example.taxiaktalaa.contrller;
 
 import com.example.taxiaktalaa.entity.Category;
+import com.example.taxiaktalaa.entity.Orders;
 import com.example.taxiaktalaa.entity.User;
 import com.example.taxiaktalaa.helper.Message;
 import com.example.taxiaktalaa.repository.CategoryReposirory;
+import com.example.taxiaktalaa.repository.OrdersRepository;
 import com.example.taxiaktalaa.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -25,6 +27,9 @@ public class HomeController {
     private BCryptPasswordEncoder passwordEncoder;
     @Autowired
     private CategoryReposirory categoryReposirory;
+
+    @Autowired
+    private OrdersRepository ordersRepository;
 
     @GetMapping("/")
     public String home(Model model){
@@ -81,5 +86,14 @@ public class HomeController {
     public String customLogin(Model model){
         model.addAttribute("title","Login Page");
         return "login";
+    }
+
+    @GetMapping("/category/{id}")
+    public String getAllOrders(Model model,@PathVariable("id") Long id){
+        Category category = categoryReposirory.findById(id).get();
+        List<Category> categories =  categoryReposirory.findAll();
+        model.addAttribute("categories",categories);
+        List<Orders> orders = ordersRepository.findByCategory(category);
+        return "orders";
     }
 }
