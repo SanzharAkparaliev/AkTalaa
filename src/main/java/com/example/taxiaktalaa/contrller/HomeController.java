@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -89,11 +90,20 @@ public class HomeController {
     }
 
     @GetMapping("/category/{id}")
-    public String getAllOrders(Model model,@PathVariable("id") Long id){
+    public String getAllOrders(Model model, @PathVariable("id") Long id){
         Category category = categoryReposirory.findById(id).get();
         List<Category> categories =  categoryReposirory.findAll();
-        model.addAttribute("categories",categories);
+
+
         List<Orders> orders = ordersRepository.findByCategory(category);
-        return "orders";
+        model.addAttribute("categories",categories);
+
+
+        model.addAttribute("category",category.getCatName());
+        model.addAttribute("orders",orders);
+        System.out.println(orders);
+        return "orders-view";
     }
+
+
 }
