@@ -23,7 +23,6 @@
                                     <th scope="col">Place</th>
                                     <th scope="col">Date</th>
                                     <th scope="col">Delete</th>
-                                    <th scope="col">Update</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -34,7 +33,6 @@
                                     <td th:text="${order.place}">Larry</td>
                                     <td th:text="${order.date}">Larry</td>
                                     <td><a href="" th:href="@{/user/orders/delete/{id}(id=${order.odersId})}" class="btn btn-danger">Delete</a></td>
-                                    <td><a href="" th:href="@{/user/orders/update/{id}(id=${order.odersId})}" class="btn btn-warning">Update</a></td>
                                 </tr>
                                 </tbody>
                             </table>

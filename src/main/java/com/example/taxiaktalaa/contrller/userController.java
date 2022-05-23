@@ -57,7 +57,7 @@ public class userController {
         model.addAttribute("title","User Dashboard");
         User  user = userRepository.getUserByUserName(principal.getName());
         System.out.println(principal.getName());
-        model.addAttribute("userName",user.getName());
+        model.addAttribute("user",user);
         return "normal/user-dashboard";
     }
 
@@ -187,8 +187,9 @@ public class userController {
 
     @GetMapping("/settings")
     public String openSettings(){
-        return "normal/settings";
+        return "normal/setting";
     }
+
 
     @PostMapping("/changepassword")
     public String changePassword(@RequestParam("oldPassword") String oldPassword,
@@ -248,4 +249,8 @@ public class userController {
         ordersRepository.deleteById(id);
         return "redirect:/user/orders";
     }
+
+
+
+
 }

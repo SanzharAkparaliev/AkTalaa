@@ -13,8 +13,17 @@
                 <div class="row ml-3">
                     <div class="col-md-12 my-3">
                         <div class="bg-mattBlackLight px-3 py-3 text-center">
-                            <h4 class="mb-2">Well Come <span th:text="${userName}"></span></h4>
+                            <h4 class="mb-2">Well Come <span th:text="${user.getName()}"></span></h4>
                         </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class=" px-3 py-3 text-center">
+                            <h4 class="mb-2"> <span th:text="${user.getAbout()}"></span></h4>
+                            <img class="card-img" src="https://upload.wikimedia.org/wikipedia/commons/f/f7/2018_Mercedes-Benz_A200_AMG_Line_Premium_Automatic_1.3_Front.jpg" alt="Suresh Dasari Card">
+
+                        </div>
+                    </div>
+                    <div class="col-md-4 ">
                     </div>
                 </div>
             </div>
