@@ -14,17 +14,25 @@
                     <div class="col-md-12 my-3">
                         <div class="bg-mattBlackLight px-3 py-3 text-center">
                             <h4 class="mb-2">Change Car Info</h4>
-                            <form action="#">
+                            <form action="#"
+                                  enctype="multipart/form-data"
+                                  method="post"
+                                  th:action="@{/user/process-update}">
                                 <div class="form-group">
                                     <input name="oldName" type="text" class="form-control" placeholder="Enter new car name">
                                 </div>
-                                <label>Car Image</label>
-                                <input type="file" placeholder="mfdmd">
                                 <div class="container text-center">
-                                    <button type="submit" class="btn btn-success">Change</button>
-                                    <button type="reset" class="btn btn-warning">Reset</button>
+                                   <img style="width: 250px;height: 250px" class="img-fluid my_profile_picture" src="" th:src="@{'/img/'+${user.imageUrl}}">
+                                    <p class="text-secondary">Choose new profile pic</p>
+                                    <!-- Image Field-->
+                                    <div class="custom-file">
+                                        <input type="file" name="profileImage">
+                                    </div>
+                                    <div class="container text-center">
+                                        <button type="submit" class="btn btn-success">Change</button>
+                                        <button type="reset" class="btn btn-warning">Reset</button>
+                                    </div>
                                 </div>
-
                             </form>
                         </div>
                     </div>

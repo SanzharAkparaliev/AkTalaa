@@ -67,7 +67,7 @@ public class HomeController {
 
            user.setRole("ROLE_USER");
            user.setEnabled(true);
-           user.setImageUrl("userlogo.png");
+           user.setImageUrl("car.png");
            user.setPassword(passwordEncoder.encode(user.getPassword()));
            System.out.println("Agreement " + agreement);
            System.out.println("User " + user);

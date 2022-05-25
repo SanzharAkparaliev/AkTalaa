@@ -18,9 +18,8 @@
                     </div>
                     <div class="col-md-12">
                         <div class=" px-3 py-3 text-center">
-                            <h4 class="mb-2"> <span th:text="${user.getAbout()}"></span></h4>
-                            <img class="card-img" src="https://upload.wikimedia.org/wikipedia/commons/f/f7/2018_Mercedes-Benz_A200_AMG_Line_Premium_Automatic_1.3_Front.jpg" alt="Suresh Dasari Card">
-
+                            <h4 class="mb-2"> <span th:text="${user.getCarName()}"></span></h4>
+                            <img class="card-img" src="" th:src="@{'/img/'+${user.imageUrl}}" alt="Car photo" height="400px" width="400px" style="horiz-align: center">
                         </div>
                     </div>
                     <div class="col-md-4 ">

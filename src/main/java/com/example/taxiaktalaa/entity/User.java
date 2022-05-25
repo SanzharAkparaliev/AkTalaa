@@ -31,7 +31,8 @@ public class User {
     private boolean enabled;
     private String imageUrl;
     @Column(length = 500)
-    private String about;
+    private String carName;
+    private String phoneNumber;
 
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL,orphanRemoval = true)
     private List<Contact> contactList = new ArrayList<>();

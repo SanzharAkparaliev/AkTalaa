@@ -148,35 +148,34 @@ public class userController {
         return "normal/update_form";
     }
     @PostMapping("/process-update")
-    public String updateHandler(@ModelAttribute Contact contact,
+    public String updateHandler(@RequestParam("oldName") String newCarName,
                                 @RequestParam("profileImage")MultipartFile file,
                                 Model model,HttpSession session
             ,Principal principal){
         try {
-            Contact oldContactDetail = contactRepository.findById(contact.getContactId().intValue()).get();
+            User user = userRepository.getUserByUserName(principal.getName());
             if(!file.isEmpty()){
                 //delete old photo
                 File deleteFile  = new ClassPathResource("static/img").getFile();
-                File file1 = new File(deleteFile,oldContactDetail.getImage());
+                File file1 = new File(deleteFile,user.getImageUrl());
                 file1.delete();
                 //update new photo
                 File saveFile  = new ClassPathResource("static/img").getFile();
                 Path path = Paths.get(saveFile.getAbsolutePath()+File.separator+file.getOriginalFilename());
                 Files.copy(file.getInputStream(),path,StandardCopyOption.REPLACE_EXISTING);
-                contact.setImage(file.getOriginalFilename());
+                user.setImageUrl(file.getOriginalFilename());
             }else{
-                contact.setImage(oldContactDetail.getImage());
+                user.setImageUrl(user.getImageUrl());
             }
-            User user = userRepository.getUserByUserName(principal.getName());
-            contact.setUser(user);
-            contactRepository.save(contact);
-            session.setAttribute("message",new Message("Your contact is updated..","success"));
+
+            userRepository.save(user);
+
+            session.setAttribute("message",new Message("Your car info is updated..","success"));
 
         }catch (Exception e){
             e.printStackTrace();
         }
-        System.out.println("contact Id" + contact.getContactId());
-        return "redirect:/user/"+contact.getContactId()+"/contact";
+        return "redirect:/user/index";
     }
 
     @GetMapping("/profile")
@@ -237,8 +236,9 @@ public class userController {
     }
 
     @GetMapping("/orders")
-    public String getOrders(Model model){
-        List<Orders> orders = ordersRepository.findAll();
+    public String getOrders(Model model,Principal principal){
+        User user = userRepository.getUserByUserName(principal.getName());
+        List<Orders> orders = user.getOrders();
         model.addAttribute("title","All Orders");
         model.addAttribute("orders",orders);
         return "normal/orders";
