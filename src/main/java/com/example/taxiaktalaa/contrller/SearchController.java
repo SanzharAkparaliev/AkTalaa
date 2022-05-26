@@ -17,14 +17,12 @@ import java.util.List;
 public class SearchController {
     @Autowired
     private UserRepository userRepository;
-    @Autowired
-    private ContactRepository contactRepository;
 
-    @GetMapping("/search/{query}")
-    public ResponseEntity<?> search(@PathVariable("query") String  query, Principal principal){
-
-        User user  = userRepository.getUserByUserName(principal.getName());
-        List<Contact> contactList = contactRepository.findByNameContainingAndUser(query,user);
-        return ResponseEntity.ok(contactList);
-    }
+//    @GetMapping("/search/{query}")
+//    public ResponseEntity<?> search(@PathVariable("query") String  query, Principal principal){
+//
+//        User user  = userRepository.getUserByUserName(principal.getName());
+//        List<Contact> contactList = contactRepository.findByNameContainingAndUser(query,user);
+//        return ResponseEntity.ok(contactList);
+//    }
 }

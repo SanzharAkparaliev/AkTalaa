@@ -1,12 +1,17 @@
 package com.example.taxiaktalaa.contrller;
 
 import com.example.taxiaktalaa.entity.Category;
+import com.example.taxiaktalaa.entity.Orders;
+import com.example.taxiaktalaa.entity.User;
 import com.example.taxiaktalaa.repository.CategoryReposirory;
+import com.example.taxiaktalaa.repository.OrdersRepository;
+import com.example.taxiaktalaa.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,6 +20,12 @@ import java.util.Optional;
 public class AdminController {
     @Autowired
     private CategoryReposirory categoryReposirory;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private OrdersRepository ordersRepository;
 
     @GetMapping("/")
     public String adminPage(Model model){
@@ -63,5 +74,20 @@ public class AdminController {
             return "admin/update-category";
         }else
             return  "404";
+    }
+    @GetMapping("/drivers")
+    public String allDrivers(Model model){
+        model.addAttribute("title","All Drivers");
+        List<User> user = (List<User>) userRepository.findByRole("ROLE_USER");
+        model.addAttribute("users",user);
+        return  "admin/drivers";
+    }
+
+    @GetMapping("/orders")
+    public String allOrders(Model model){
+        model.addAttribute("title","All Orders");
+        List<Orders> orders = ordersRepository.findAll();
+        model.addAttribute("orders",orders);
+        return "admin/orders";
     }
 }

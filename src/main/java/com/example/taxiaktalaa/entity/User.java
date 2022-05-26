@@ -34,8 +34,7 @@ public class User {
     private String carName;
     private String phoneNumber;
 
-    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL,orphanRemoval = true)
-    private List<Contact> contactList = new ArrayList<>();
+
 
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL,orphanRemoval = true)
     private List<Orders> orders = new ArrayList<>();
