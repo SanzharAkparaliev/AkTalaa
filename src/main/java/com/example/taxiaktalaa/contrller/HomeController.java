@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 public class HomeController {
@@ -36,15 +35,16 @@ public class HomeController {
     public String home(Model model){
         model.addAttribute("title","Ak-Talaa");
         List<Category> category =  categoryReposirory.findAll();
-        System.out.println(category);
         model.addAttribute("categories",category);
         return "home";
     }
 
     @GetMapping("/signup")
     public String singup(Model model){
-        model.addAttribute("title","Register - Smart Contact Manager");
+        model.addAttribute("title","Register - AkTalaa Taxi");
         model.addAttribute("user",new User());
+        List<Category> category =  categoryReposirory.findAll();
+        model.addAttribute("categories",category);
         return "signup";
     }
 
@@ -86,6 +86,8 @@ public class HomeController {
     @GetMapping("/singin")
     public String customLogin(Model model){
         model.addAttribute("title","Login Page");
+        List<Category> category =  categoryReposirory.findAll();
+        model.addAttribute("categories",category);
         return "login";
     }
 
@@ -105,6 +107,12 @@ public class HomeController {
         return "orders-view";
     }
 
-
+    @GetMapping("/aboutus")
+    public String aboutUs(Model model){
+        List<Category> category =  categoryReposirory.findAll();
+        model.addAttribute("categories",category);
+        model.addAttribute("title","About Us");
+        return  "aboutus";
+    }
 
 }
