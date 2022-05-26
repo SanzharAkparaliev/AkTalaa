@@ -75,4 +75,24 @@
 </script>
 
 </body>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.sideMenuToggler').on('click', function() {
+            $('.wrapper').toggleClass('active');
+        });
+
+        var adjustSidebar = function() {
+            $('.sidebar').slimScroll({
+                height: document.documentElement.clientHeight - $('.navbar').outerHeight()
+            });
+        };
+
+        adjustSidebar();
+        $(window).resize(function() {
+            adjustSidebar();
+        });
+    });
+</script>
 </html>

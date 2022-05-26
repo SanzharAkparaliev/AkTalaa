@@ -1,10 +1,16 @@
-console.log("this is script")
-const toggleSidebar = () => {
-    if($(".sidebar").is(":visible")){
-        $(".sidebar").css("display","none");
-        $(".content").css("margin-left","0%")
-    }else{
-        $(".sidebar").css("display","block");
-        $(".content").css("margin-left","20%")
-    }
-}
+$(document).ready(function() {
+    $('.sideMenuToggler').on('click', function() {
+        $('.wrapper').toggleClass('active');
+    });
+
+    var adjustSidebar = function() {
+        $('.sidebar').slimScroll({
+            height: document.documentElement.clientHeight - $('.navbar').outerHeight()
+        });
+    };
+
+    adjustSidebar();
+    $(window).resize(function() {
+        adjustSidebar();
+    });
+});

@@ -241,6 +241,7 @@ public class userController {
         List<Orders> orders = user.getOrders();
         model.addAttribute("title","All Orders");
         model.addAttribute("orders",orders);
+        System.out.println(orders);
         return "normal/orders";
     }
 
