@@ -1,19 +1,14 @@
 package com.example.taxiaktalaa.contrller;
 
 import com.example.taxiaktalaa.entity.Category;
-import com.example.taxiaktalaa.entity.Contact;
 import com.example.taxiaktalaa.entity.Orders;
 import com.example.taxiaktalaa.entity.User;
 import com.example.taxiaktalaa.helper.Message;
 import com.example.taxiaktalaa.repository.CategoryReposirory;
-import com.example.taxiaktalaa.repository.ContactRepository;
 import com.example.taxiaktalaa.repository.OrdersRepository;
 import com.example.taxiaktalaa.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -58,11 +53,6 @@ public class userController {
         return "normal/user-dashboard";
     }
 
-
-
-
-
-
     @PostMapping("/process-update")
     public String updateHandler(@RequestParam("oldName") String newCarName,
                                 @RequestParam("profileImage")MultipartFile file,
@@ -94,11 +84,7 @@ public class userController {
         return "redirect:/user/index";
     }
 
-    @GetMapping("/profile")
-    public String yourProfile(Model model){
-        model.addAttribute("title","Profile Page");
-        return "normal/profile";
-    }
+
 
     @GetMapping("/settings")
     public String openSettings(){
@@ -163,8 +149,13 @@ public class userController {
 
     @GetMapping("/orders/delete/{ordersId}")
     public String deleteOrders(@PathVariable("ordersId")Long id){
-        ordersRepository.deleteById(id);
-        return "redirect:/user/orders";
+        try{
+            Optional<Orders> orders = ordersRepository.findById(id);
+            ordersRepository.deleteById(id);
+            return "redirect:/user/orders";
+        }catch (Exception e){
+            return "404";
+        }
     }
 
 

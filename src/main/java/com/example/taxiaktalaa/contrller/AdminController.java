@@ -11,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -62,8 +61,13 @@ public class AdminController {
 
     @GetMapping("/categories/delete/{id}")
     public String deleteCategory(@PathVariable("id")Long id){
-        categoryReposirory.deleteById(id);
-        return "redirect:/admin/categories";
+        try {
+            Optional<Category> category = categoryReposirory.findById(id);
+            categoryReposirory.deleteById(id);
+            return "redirect:/admin/categories";
+        }catch (Exception ex){
+            return "404";
+        }
     }
 
     @GetMapping("/categories/update/{id}")
@@ -89,5 +93,27 @@ public class AdminController {
         List<Orders> orders = ordersRepository.findAll();
         model.addAttribute("orders",orders);
         return "admin/orders";
+    }
+
+    @GetMapping("/order/delete/{id}")
+    public String deleteOrder(@PathVariable Integer id){
+        try {
+            Optional<Orders> orders = ordersRepository.findById(Long.valueOf(id));
+            ordersRepository.deleteById(Long.valueOf(id));
+            return "redirect:/admin/orders";
+        }catch (Exception e){
+            return "404";
+        }
+    }
+
+    @GetMapping("/user/delete/{id}")
+    public String deleteUser(@PathVariable Integer id){
+        try {
+            Optional<User> user = userRepository.findById(id);
+            userRepository.deleteById(id);
+            return "redirect:/admin/drivers";
+        }catch (Exception e){
+            return "404";
+        }
     }
 }

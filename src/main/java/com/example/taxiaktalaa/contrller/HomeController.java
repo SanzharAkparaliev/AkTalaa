@@ -56,7 +56,6 @@ public class HomeController {
     Boolean agreement, Model model, HttpSession session){
        try {
            if(!agreement){
-               System.out.println("You have not agreed the terms and conditions");
                throw new Exception("You have not agreed the terms and conditions");
            }
 
@@ -67,10 +66,8 @@ public class HomeController {
 
            user.setRole("ROLE_USER");
            user.setEnabled(true);
-           user.setImageUrl("car.png");
+           user.setImageUrl("car.jpg");
            user.setPassword(passwordEncoder.encode(user.getPassword()));
-           System.out.println("Agreement " + agreement);
-           System.out.println("User " + user);
            model.addAttribute("user",new User());
            userRepository.save(user);
            session.setAttribute("message",new Message("Successfully Register !! " ,"alert-success"));
@@ -93,17 +90,18 @@ public class HomeController {
 
     @GetMapping("/category/{id}")
     public String getAllOrders(Model model, @PathVariable("id") Long id){
-        Category category = categoryReposirory.findById(id).get();
-        List<Category> categories =  categoryReposirory.findAll();
 
+        try {
+            Category category = categoryReposirory.findById(id).get();
+            List<Category> categories =  categoryReposirory.findAll();
+            List<Orders> orders = ordersRepository.findByCategory(category);
+            model.addAttribute("categories",categories);
 
-        List<Orders> orders = ordersRepository.findByCategory(category);
-        model.addAttribute("categories",categories);
-
-
-        model.addAttribute("category",category.getCatName());
-        model.addAttribute("orders",orders);
-        System.out.println(orders);
+            model.addAttribute("category",category.getCatName());
+            model.addAttribute("orders",orders);
+        }catch (Exception exception){
+            return "404";
+        }
         return "orders-view";
     }
 
@@ -113,6 +111,14 @@ public class HomeController {
         model.addAttribute("categories",category);
         model.addAttribute("title","About Us");
         return  "aboutus";
+    }
+
+    @GetMapping("/questions")
+    public String questions(Model model){
+        List<Category> category =  categoryReposirory.findAll();
+        model.addAttribute("categories",category);
+        model.addAttribute("title","FAG");
+        return "questions";
     }
 
 }

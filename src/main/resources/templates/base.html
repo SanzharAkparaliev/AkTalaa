@@ -8,6 +8,8 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
     <link th:href="@{/css/style.css}"  rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-icons/3.0.1/iconfont/material-icons.min.css" integrity="sha256-x8PYmLKD83R9T/sYmJn1j3is/chhJdySyhet/JuHnfY=" crossorigin="anonymous"/>
+
 
     <title th:text="${title}"></title>
 </head>
@@ -38,44 +40,42 @@
                     <li class="dropdown nav-link">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="/">Баракчалар <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="./html/questions.html">Суроолор</a></li>
-                            <li><a href="#">Page 1-2</a></li>
-                            <li><a href="#">Page 1-3</a></li>
+                            <li><a href="#" th:href="@{/questions}">Суроолор</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/aboutus">Биз жонундо</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="contact.html">Байланыш</a>
-                    </li>
                 </ul>
 
                 <ul class="nav navbar-nav ml-auto registr ">
-                    <li class="nav-item"sec:authorize="isAuthenticated() && hasAnyRole('ROLE_USER')" >
-                        <a class="nav-link" href="#" th:href="@{user/index}" >Заказдар</a>
-                    </li>
-                    <li class="nav-item"sec:authorize="hasAnyRole('ROLE_ADMIN')">
-                        <a class="nav-link" href="#" th:href="@{admin/}" >Админ</a>
-                    </li>
-                    <li sec:authorize="isAnonymous()">
-                        <a href="#" th:href="@{/singin}"  >
-                                <span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-                                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
-                                        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
-                                    </svg>
-                                </span>
+
+                    <li class="nav-item" sec:authorize="isAuthenticated() && hasAnyRole('ROLE_USER')">
+                        <a href="#"  th:href="@{/user/index}" class="nav-link px-2">
+                            <i class="material-icons icon large">
+                                person
+                            </i>
                         </a>
                     </li>
-                    <li sec:authorize="isAnonymous()">
-                        <a href="#" th:href="@{/signup}" >
-                                <span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
-                                        <path fill-rule="evenodd" d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0v-2z"/>
-                                        <path fill-rule="evenodd" d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
-                                    </svg>
-                                </span>
+                    <li class="nav-item"sec:authorize="hasAnyRole('ROLE_ADMIN')">
+                        <a class="nav-link" href="#" th:href="@{/admin/}" >
+                            <i class="material-icons icon large">
+                                person
+                            </i>
+                        </a>
+                    </li>
+                    <li class="nav-item" sec:authorize="isAnonymous()">
+                        <a href="#"  th:href="@{/singin}" class="nav-link px-2">
+                            <i class="material-icons  tiny">
+                                input
+                            </i>
+                        </a>
+                    </li>
+                    <li class="nav-item" sec:authorize="isAnonymous()">
+                        <a href="#"  th:href="@{/signup}" class="nav-link px-2">
+                            <i class="material-icons tyny">
+                                person_add
+                            </i>
                         </a>
                     </li>
                 </ul>
